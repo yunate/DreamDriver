@@ -1,10 +1,10 @@
 #include "simple_app.h"
 #include "main_wnd.h"
 #include "g_path.h"
+#include "simple_draw_board.h"
 
 #include "commgr2.h"
 #include "souistd.h"
-
 #include <memory>
 
 using namespace SOUI;
@@ -22,9 +22,9 @@ using namespace SOUI;
 
 BEG_NSP_DDM
 
-using sp_app = std::shared_ptr<SApplication>;
+using sp_soui_app = std::shared_ptr<SApplication>;
 
-sp_app create_app(SComMgr2& comMgr, HINSTANCE hInstance)
+static sp_soui_app create_soui_app(SComMgr2& comMgr, HINSTANCE hInstance)
 {
     SAutoRefPtr<IImgDecoderFactory> pImgDecoderFactory;
     if (!comMgr.CreateImgDecoder((IObjRef**)&pImgDecoderFactory)) {
@@ -45,10 +45,10 @@ sp_app create_app(SComMgr2& comMgr, HINSTANCE hInstance)
     }
 
     // 定义一个唯一的SApplication对象，SApplication管理整个应用程序的资源
-    return sp_app(new (std::nothrow) SApplication(pRenderFactory, hInstance));
+    return sp_soui_app(new (std::nothrow) SApplication(pRenderFactory, hInstance));
 }
 
-bool load_resource(sp_app spApp, HINSTANCE hInstance)
+static bool load_resource(sp_soui_app spApp, HINSTANCE hInstance)
 {
 #ifdef _DEBUG
     // 将程序的运行路径修改到demo所在的目录
@@ -101,10 +101,16 @@ bool load_resource(sp_app spApp, HINSTANCE hInstance)
     return true;
 }
 
+// 注册控件
+static void regist_ctl(sp_soui_app spApp)
+{
+    spApp->RegisterWindowClass<simple_draw_board>();
+}
+
 int simple_app::run_wnd(HINSTANCE hInstance)
 {
     SComMgr2 comMgr(_DDT("imgdecoder-png"));
-    sp_app spApp = create_app(comMgr, hInstance);
+    sp_soui_app spApp = create_soui_app(comMgr, hInstance);
 
     if (spApp == nullptr) {
         return -1;
@@ -113,6 +119,8 @@ int simple_app::run_wnd(HINSTANCE hInstance)
     if (!load_resource(spApp, hInstance)) {
         return -1;
     }
+
+    regist_ctl(spApp);
 
     {
         CMainWnd wndMain;

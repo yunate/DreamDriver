@@ -28,12 +28,7 @@ ddstr g_path::get_moudle_run_path(HMODULE hMoudle/* = NULL*/)
     return moudlePath;
 }
 
-ddstr g_path::get_host_dll_name()
-{
-    return _DDT("HostDll.dll");
-}
-
-ddstr g_path::get_host_dll_path()
+ddstr g_path::get_moudle_dir(HMODULE hMoudle)
 {
     ddstr exePath = get_moudle_run_path();
 
@@ -48,6 +43,24 @@ ddstr g_path::get_host_dll_path()
     }
 
     exePath = exePath.substr(0, pos + 1);
+    return exePath;
+}
+
+ddstr g_path::get_host_dll_name()
+{
+    return _DDT("HostDll.dll");
+}
+
+ddstr g_path::get_host_dll_path()
+{
+    ddstr exePath = get_moudle_dir();
+
+    if (exePath.empty()) {
+        return _DDT("");
+    }
+
+    size_t pos = exePath.find_last_of(_DDT("\\"));
+
     exePath += get_host_dll_name();
     return exePath;
 }

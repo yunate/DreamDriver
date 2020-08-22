@@ -4,6 +4,7 @@
 
 #include "base\g_def.h"
 #include "souistd.h"
+#include "timer_frame_drawer.h"
 
 #include <memory>
 
@@ -19,10 +20,13 @@ public:
         : SHostWnd(_T("LAYOUT:XML_MAINWND"))//这里定义主界面需要使用的布局文件
     {
         m_bLayoutInited = FALSE;
+        m_spTimerFrameDrawer.reset(new timer_frame_drawer());
+
     }
 
     void OnClose()
     {
+        m_spTimerFrameDrawer.reset();
         PostMessage(WM_QUIT);
     }
     void OnMaximize()
@@ -55,6 +59,11 @@ public:
     }
     void OnBtnMsgBox()
     {
+        simple_draw_board* drawBoard = (simple_draw_board*)FindChildByName("player");;
+        m_spTimerFrameDrawer->init(drawBoard);
+        m_spTimerFrameDrawer->start();
+        return;
+        // 
         SMessageBox(NULL, _T("this is a message box"), _T("haha"), MB_OK | MB_ICONEXCLAMATION);
         SMessageBox(NULL, _T("this message box includes two buttons"), _T("haha"), MB_YESNO | MB_ICONQUESTION);
         SMessageBox(NULL, _T("this message box includes three buttons"), NULL, MB_ABORTRETRYIGNORE);
@@ -86,6 +95,7 @@ protected:
     END_MSG_MAP()
 private:
     BOOL            m_bLayoutInited;
+    sp_timer_frame_drawer m_spTimerFrameDrawer;
 };
 END_NSP_DDM
 #endif // main_dlg_h_

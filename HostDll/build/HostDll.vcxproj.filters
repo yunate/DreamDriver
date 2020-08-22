@@ -24,6 +24,12 @@
     <ClCompile Include="..\src\main_wnd.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\simple_draw_board.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\timer_frame_drawer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\export\host_dll.h">
@@ -33,6 +39,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\main_wnd.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\simple_draw_board.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\timer_frame_drawer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,6 +8,7 @@
       <imgbtn name="btn_min" skin="_skin.sys.btn.minimize" pos="-121,0" animate="1" />
     </caption>
     <window pos="5,30,-5,-5">
+      <simple_draw_board name="player" pos="5,30,@500,@500" colorBkgnd="#123456"/>
       <text pos="|0,|0" pos2type="center" colorText="#ff0000">Hellow World! UI? Just so so!</text>
       <button class ="normalbtn" pos="|-50,[20,@100,@30" name="btn_msgbox">show msg box</button> 
     </window>

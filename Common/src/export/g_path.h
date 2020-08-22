@@ -14,6 +14,9 @@ public:
     // @param [in，out] hMoudle 模块句柄，如果为空则自动获取
     static ddstr get_moudle_run_path(HMODULE hMoudle = NULL);
 
+    // 获得模块的运行路径，不包括文件名称
+    static ddstr get_moudle_dir(HMODULE hMoudle = NULL);
+
     // 获得 host dll 名称包括后缀
     static ddstr get_host_dll_name();
 
