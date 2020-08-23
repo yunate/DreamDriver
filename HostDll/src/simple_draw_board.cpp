@@ -24,7 +24,11 @@ void simple_draw_board::on_paint(IRenderTarget* pRT)
     // byAlpha
     __super::OnPaint(pRT);
     CRect rcSrc(0, 0, m_spBitmap->Width(), m_spBitmap->Height());
-    pRT->DrawBitmapEx(rcSrc, m_spBitmap, rcSrc, EM_NULL);
+
+    if (rcSrc.Height() == 0 || rcSrc.Width() == 0) {
+        return;
+    }
+    pRT->DrawBitmapEx(GetWindowRect(), m_spBitmap, rcSrc, EM_NULL);
 }
 
 END_NSP_DDM

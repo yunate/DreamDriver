@@ -2,6 +2,7 @@
 #include "main_wnd.h"
 #include "g_path.h"
 #include "simple_draw_board.h"
+#include "controls.extend/SFreeMoveWindow.h"
 
 #include "commgr2.h"
 #include "souistd.h"
@@ -105,6 +106,7 @@ static bool load_resource(sp_soui_app spApp, HINSTANCE hInstance)
 static void regist_ctl(sp_soui_app spApp)
 {
     spApp->RegisterWindowClass<simple_draw_board>();
+    spApp->RegisterWindowClass<SFreeMoveWindow>();
 }
 
 int simple_app::run_wnd(HINSTANCE hInstance)

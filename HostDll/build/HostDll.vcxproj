@@ -24,6 +24,7 @@
     <ClCompile Include="..\src\dll_main.cpp" />
     <ClCompile Include="..\src\simple_draw_board.cpp" />
     <ClCompile Include="..\src\timer_frame_drawer.cpp" />
+    <ClCompile Include="..\vendor\controls.extend\SFreeMoveWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\main_wnd.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="..\src\export\host_dll.h" />
     <ClInclude Include="..\src\simple_draw_board.h" />
     <ClInclude Include="..\src\timer_frame_drawer.h" />
+    <ClInclude Include="..\vendor\controls.extend\SFreeMoveWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B16C65EA-2220-4F31-834F-E539C94914BC}</ProjectGuid>

@@ -13,6 +13,9 @@
     <Filter Include="src\export">
       <UniqueIdentifier>{48c1fb0b-a96b-48fa-aac1-95bd4e945a6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\controls.extend">
+      <UniqueIdentifier>{e5d1d63a-9961-4317-8ef9-8a8efbece610}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\dll_main.cpp">
@@ -30,6 +33,9 @@
     <ClCompile Include="..\src\timer_frame_drawer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\vendor\controls.extend\SFreeMoveWindow.cpp">
+      <Filter>src\controls.extend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\export\host_dll.h">
@@ -46,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="..\src\timer_frame_drawer.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\controls.extend\SFreeMoveWindow.h">
+      <Filter>src\controls.extend</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
