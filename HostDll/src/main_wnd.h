@@ -5,6 +5,7 @@
 #include "base\g_def.h"
 #include "souistd.h"
 #include "timer_frame_drawer.h"
+#include "timer_frame_res_provider_gif.h"
 
 #include <memory>
 
@@ -59,8 +60,10 @@ public:
     }
     void OnBtnMsgBox()
     {
-        simple_draw_board* drawBoard = (simple_draw_board*)FindChildByName("player");;
-        m_spTimerFrameDrawer->init(drawBoard);
+        simple_draw_board* drawBoard = (simple_draw_board*)FindChildByName("player");
+
+        sp_timer_frame_provider spProvider(new timer_frame_res_provider_gif());
+        m_spTimerFrameDrawer->init(drawBoard, spProvider);
         m_spTimerFrameDrawer->start();
         return;
         // 

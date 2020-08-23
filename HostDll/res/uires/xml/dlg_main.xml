@@ -9,7 +9,7 @@
     </caption>
     <window pos="5,30,-5,-5">
       <freeMoveWindow name="fmw_test" margin="5,5,5,5" clipClient="1" colorBorder="#cccccc" width="500" height="500" valign="0x20" halign="0x02" distx="20" disty="20" colorBkgnd="@color/blue">
-        <simple_draw_board name="player" pos="0,0,@250,@250" colorBkgnd="#123456"/>
+        <simple_draw_board name="player" pos="0,0,@500,@500" colorBkgnd="#123456"/>
         <button class ="normalbtn" pos="|-50,[20,@100,@30" name="btn_msgbox">show msg box</button> 
       </freeMoveWindow>
     </window>

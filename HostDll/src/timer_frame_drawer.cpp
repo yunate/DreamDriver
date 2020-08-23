@@ -3,11 +3,7 @@
 #include "file/file_reader.h"
 #include "g_path.h"
 
-using namespace DogGifNSP;
 BEG_NSP_DDM
-
-// TODO: 待删除，测试gif，以后抽象层接口供视频、gif等播放
-DogGif* g_dogGif;
 
 timer_frame_drawer::timer_frame_drawer()
 {
@@ -19,30 +15,24 @@ timer_frame_drawer::~timer_frame_drawer()
     m_pDrawBoard = nullptr;
 }
 
-void timer_frame_drawer::init(simple_draw_board* drawBoard)
+bool timer_frame_drawer::init(simple_draw_board* drawBoard, const sp_timer_frame_provider& provider)
 {
+    if (drawBoard == nullptr || provider == nullptr) {
+        return false;
+    }
+
     m_pDrawBoard = drawBoard;
-
-    g_dogGif = new DogGif();
+    m_provider = provider;
     ddstr runPath = g_path::get_moudle_dir();
-    file_reader reader(runPath + _DDT("1.gif"));
 
-    if (!reader.open(nullptr, 0))
-    {
-        return;
+    if (!m_provider->init(runPath + _DDT("1.gif"))) {
+        m_pDrawBoard = nullptr;
+        m_provider.reset();
+        return false;
     }
 
-    size_t fileSize = reader.get_file_size();
-
-    if (fileSize > 0)
-    {
-        u8* pBuff = new u8[fileSize];
-        reader.get_buff(pBuff, (u32)fileSize);
-        g_dogGif->Init(pBuff, (u32)fileSize);
-        delete[] pBuff;
-    }
-
-    m_timeDelay = g_dogGif->GetTimeDelay();
+    m_timeDelay = m_provider->get_time_delay();
+    return true;
 }
 
 void timer_frame_drawer::start()
@@ -75,23 +65,11 @@ void timer_frame_drawer::OnNextFrame()
         return;
     }
 
-    m_timeDelay = g_dogGif->GetTimeDelay();
-
-    DogGifColor* pBuffData;
-    u32 buffLen;
-    if (!g_dogGif->GetNextFrame(&pBuffData, buffLen)) {
-        return;
-    }
-
-    for (u32 i = 0; i < buffLen; ++i) {
-        DogGifColor tmp = pBuffData[i];
-        pBuffData[i].m_b = tmp.m_r;
-        pBuffData[i].m_g = tmp.m_g;
-        pBuffData[i].m_r = tmp.m_b;
-        pBuffData[i].m_a = tmp.m_a;
-    }
-
-    m_pDrawBoard->draw(g_dogGif->GetGolWidth(), g_dogGif->GetGolHeight(), pBuffData);
+    m_timeDelay = m_provider->get_time_delay();
+    u32 w; 
+    u32 h;
+    auto data = m_provider->get_next_frame(w, h);
+    m_pDrawBoard->draw(w, h, data);
 }
 
 END_NSP_DDM

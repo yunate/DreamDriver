@@ -36,6 +36,9 @@
     <ClCompile Include="..\vendor\controls.extend\SFreeMoveWindow.cpp">
       <Filter>src\controls.extend</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\timer_frame_res_provider_gif.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\export\host_dll.h">
@@ -55,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="..\vendor\controls.extend\SFreeMoveWindow.h">
       <Filter>src\controls.extend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\i_timer_frame_res_provider.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\timer_frame_res_provider_gif.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

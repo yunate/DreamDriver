@@ -2,6 +2,7 @@
 #ifndef timer_frame_drawer_h_
 #define timer_frame_drawer_h_ 1
 #include "simple_draw_board.h"
+#include "i_timer_frame_res_provider.h"
 
 #include <memory>
 using namespace SOUI;
@@ -13,7 +14,7 @@ public:
     timer_frame_drawer();
     ~timer_frame_drawer();
 
-    void init(simple_draw_board* drawBoard);
+    bool init(simple_draw_board* drawBoard, const sp_timer_frame_provider& provider);
 
     void start();
     void pause();
@@ -25,6 +26,7 @@ private:
 protected:
     simple_draw_board* m_pDrawBoard = nullptr;
     s32 m_timeDelay = 60;
+    sp_timer_frame_provider m_provider = nullptr;
 };
 
 
